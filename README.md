@@ -1,63 +1,94 @@
-# Diabetic-Retinopathy-Detection
-Deep learning-based diabetic retinopathy severity classification using retinal fundus images, featuring a DenseNet121-based model, image augmentation, MixUp, ordinal-style labeling, and evaluation with Quadratic Weighted Kappa (QWK).
+# 🩺 Diabetic Retinopathy Detection
 
+### Deep Learning-Based Retinal Image Classification
 
+A deep learning project for **five-class diabetic retinopathy severity classification** using retinal fundus images. The project explores a DenseNet121-based deep learning approach alongside traditional machine learning models using handcrafted image features.
 
-# Diabetic Retinopathy Detection
-
-A deep learning-based medical image classification project for detecting and classifying diabetic retinopathy severity from retinal fundus images.
-
-## Overview
-
-Diabetic retinopathy (DR) is an eye condition associated with diabetes that can progress through different severity levels. This project develops a machine learning and deep learning pipeline to classify retinal fundus images into five diabetic retinopathy severity classes.
-
-The project explores both a DenseNet121-based deep learning approach and traditional machine learning methods using handcrafted image features.
-
-> **Note:** This project is intended for machine learning research and educational purposes. It is not a medical diagnostic system.
+> **Disclaimer:** This project is developed for educational and research purposes and should not be used as a medical diagnostic system.
 
 ---
 
-## Classes
+## 📌 Project Overview
 
-The model classifies retinal images into five severity levels:
+Diabetic retinopathy is a diabetes-related eye condition that can develop through different stages of severity. Automated analysis of retinal fundus images can help researchers investigate machine learning approaches for severity classification.
+
+This project focuses on building and evaluating machine learning pipelines that classify retinal images into five diabetic retinopathy severity levels.
+
+### Project Highlights
+
+- 🧠 DenseNet121-based deep learning model
+- 🖼️ Retinal fundus image classification
+- 🔄 Image augmentation and MixUp
+- 📊 Quadratic Weighted Kappa (QWK) evaluation
+- 🤖 Traditional ML model comparison
+- 🔍 HOG, LBP, GLCM and color-based feature extraction
+- 📈 Confusion matrix and prediction analysis
+
+---
+
+## 🎯 Classification Classes
+
+The system classifies retinal images into five severity categories:
 
 | Class | Severity |
-|------:|----------|
-| 0 | No Diabetic Retinopathy |
-| 1 | Mild |
-| 2 | Moderate |
-| 3 | Severe |
-| 4 | Proliferative |
+|:---:|---|
+| **0** | No Diabetic Retinopathy |
+| **1** | Mild |
+| **2** | Moderate |
+| **3** | Severe |
+| **4** | Proliferative |
 
 ---
 
-## Dataset
+## 📊 Dataset
 
 The project uses labeled retinal fundus images for training and evaluation.
 
-- **Training images:** 3,662
-- **Test images:** 1,928
-- **Number of classes:** 5
-- **Image size for deep learning:** 224 × 224 × 3
-- The dataset contains a noticeable class imbalance, with fewer samples in some severity categories.
+| Property | Value |
+|---|---:|
+| Training images | 3,662 |
+| Test images | 1,928 |
+| Number of classes | 5 |
+| Deep learning input size | 224 × 224 × 3 |
+
+The dataset is imbalanced, with substantially fewer samples in some of the more severe categories.
 
 ---
 
-## Methodology
+# 🔬 Methodology
 
-The overall workflow is:
+The project contains two main experimental pipelines.
 
 ```text
-Retinal Fundus Images
-        ↓
-Image Preprocessing
-        ↓
-Data Augmentation
-        ↓
-MixUp Augmentation
-        ↓
-DenseNet121-based Model
-        ↓
-Severity Classification
-        ↓
-QWK & Confusion Matrix Evaluation
+                  Retinal Fundus Images
+                           │
+                           ▼
+                  Image Preprocessing
+                           │
+                 ┌─────────┴─────────┐
+                 │                   │
+                 ▼                   ▼
+        Deep Learning Pipeline   Classical ML Pipeline
+                 │                   │
+                 ▼                   ▼
+            DenseNet121        Feature Extraction
+                 │                   │
+                 │              ┌────┴────┐
+                 │              │         │
+                 │             HOG       LBP
+                 │              │         │
+                 │             GLCM   Color Hist.
+                 │              │         │
+                 │              └────┬────┘
+                 │                   ▼
+                 │                  PCA
+                 │                   │
+                 │            ┌──────┼──────┬──────┐
+                 │            ▼      ▼      ▼      ▼
+                 │            RF     SVM   XGBoost CatBoost
+                 │
+                 ▼
+          Severity Prediction
+                 │
+                 ▼
+        QWK / Confusion Matrix
